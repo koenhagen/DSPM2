@@ -102,7 +102,7 @@ regression = LogisticRegression()
 tree = tree.DecisionTreeClassifier(criterion='gini',min_samples_leaf=20)
 vectorMachine = svm.SVC(kernel='poly',degree=3)
 neuralNetwork = MLPClassifier(max_fun=15000, max_iter=500)
-for method in tree,neuralNetwork:
+for method in neuralNetwork,tree:
     results.drop(results.index, inplace=True)
     method = method.fit(train_data_total[["MoneySpentEUR","LastPurchase","AverageTransactionSize",'Transactions','daysActive','daysInactive','avgTimeBetweenTransactions','countryIsGreece']].fillna(0), train_data_total['prediction'].fillna(0))
     results["prediction"] = method.predict(test_data[["MoneySpentEUR","LastPurchase","AverageTransactionSize",'Transactions','daysActive','daysInactive','avgTimeBetweenTransactions','countryIsGreece']].fillna(0).astype(int))
